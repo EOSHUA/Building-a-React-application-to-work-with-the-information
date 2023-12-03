@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Error from './pages/Error';
 import {BrowserRouter, Routes , Route} from 'react-router-dom';
 import Posts from './pages/Posts';
+import Photos from './pages/photos';
 
 
 export const UserContext = createContext({
@@ -30,10 +31,11 @@ function App() {
 
   <Routes>
         <Route path='/' element ={<Login/> }></Route>
-        <Route  path='User/Home' element ={<Home />} >  </Route>
+        <Route  path='User/Home' element ={<Home  />} >  </Route>
         <Route path='User/Home/Todos' element ={<Todos />}>  </Route>
         <Route path='User/Home/Albums' element ={<Albums/>}>   </Route>
         <Route path='User/Home/Posts' element={<Posts />}>  </Route>
+        <Route path='User/Home/Photos' element ={<Photos/>}>   </Route>
         <Route path='*' element={<Error />}>  </Route>
        
   </Routes>

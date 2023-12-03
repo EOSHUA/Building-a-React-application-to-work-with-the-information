@@ -4,8 +4,9 @@ import { useNavigate  } from 'react-router-dom';
 
 
 function Home() {
-    
+
   const navigate = useNavigate();
+  
     return (
        <section className='panel'>
         <br />
@@ -16,8 +17,6 @@ function Home() {
         <div className='butLink' onClick={()=>navigate('Albums')}>Albums</div>
         <div className='butLink' onClick={()=>navigate('Todos')}>Todos</div>
         <div className='butLink' onClick={()=>navigate('Posts')}>Posts</div>
-        
-        
             {/* <Outlet/> */}
        </section>
         

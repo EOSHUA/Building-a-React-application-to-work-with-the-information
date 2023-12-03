@@ -3,9 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react'; 
 import { UserContext } from '../App';
-import Buttons from './buttons';
-import Sorting from './sorting';
-
 
 
 export default function Posts() {
@@ -17,6 +14,7 @@ export default function Posts() {
   const [render,setRender] = useState(0);
   const [renderFilter,setRenderFilter] = useState(0);
   const [json, setJson] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
   
 
  
@@ -87,6 +85,10 @@ function toApDate(){
       .then((json) => console.log(json));
   }
 
+  function showPost(post) {
+    setSelectedPost(post);
+  }
+
 
   return (
     <section>
@@ -96,7 +98,6 @@ function toApDate(){
       </div>
       <br/>
       <button onClick={SortingTitleVal}>Search by title</button>
-      {/* <Sorting todos={json} setPoUpdateInformationsts ={setPosts}  setTodosFilter={setTodosFilter} setRenderFilter={setRenderFilter} renderFilter={renderFilter} /> */}
       <br/>
       <button onClick={() => {
           add();
@@ -108,12 +109,20 @@ function toApDate(){
         <div>
          </div>
          <br/>
+         {selectedPost && (
+        <div className='SelectedPostDetails'>
+          <h2>Selected Post Details:</h2>
+          <p>Title: {selectedPost.title}</p>
+          <p>Body: {selectedPost.body}</p>
+        </div>
+      )}
       <div>
         {posts.map((post) => (
           <div className='PresentationOfInformation' key={post.id}> 
             <ul>
+                <li>{post.id}</li>
                 <li>{post.title}</li>
-                <li>{post.body}</li>
+                {/* <li>{post.body}</li> */}
                   <button onClick={() => {
                       toApDate ();
                       setRender (render+1);
@@ -123,10 +132,15 @@ function toApDate(){
                         deletePost ();
                         setRender (render+1);
                       }}>delete</button>
-                          </ul>
-                          </div>
-                      ))}
+
+                      <button onClick={() => {
+                        showPost (post);   
+                      }}>Show me</button>
+              </ul>
+           </div>
+          ))}
       </div>
+      
 
     </section>
   );
