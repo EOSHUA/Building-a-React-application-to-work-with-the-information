@@ -20,12 +20,19 @@ export default function Sorting(props) {
        
     }
 
-    function SortingTitleVal(){
-        <input type="text" />
-        const  filteredTodos = props.todos.filter((todo)=>todo.completed===false);
-        props.UpdateInformation(filteredTodos);
-        props.setTodosFilter(filteredTodos);
-        props.setRenderFilter(props.renderFilter+1)
+    function SortingTitleVal() {
+    const inputText = prompt("Enter title");   
+    if (inputText === null) {
+        return; 
+    }
+
+    const filteredTodos = props.todos.filter((todo) =>
+        todo.title.toLowerCase().includes(inputText.toLowerCase())
+    );
+
+    props.UpdateInformation(filteredTodos);
+    props.setTodosFilter(filteredTodos);
+    props.setRenderFilter(props.renderFilter + 1);
     }
 
   return (

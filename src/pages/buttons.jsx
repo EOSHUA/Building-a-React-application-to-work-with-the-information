@@ -1,14 +1,10 @@
 import React from "react";
+import { UserContext } from '../App';
+import   {  useContext } from 'react';
 
 export default function Buttons(props) {
 
-//   function deleteTodo(){
-//     fetch(`http://localhost:3005/todos?userId=${props.userId}&id=${props.id}`, {
-//   method: 'DELETE',
-  
-// }).then((x)=>console.log("ojojjoj");
-// props.rend(2)
-//   });
+  const { currentUser } = useContext(UserContext);
   function deleteTodo() {
     fetch( `http://localhost:3005/todos/${props.id}`, {
       method: "DELETE",
@@ -26,7 +22,7 @@ export default function Buttons(props) {
     fetch(`http://localhost:3005/Todos/${props.id}`, {
       method: "PUT",
       body: JSON.stringify({
-        userId: 1,
+        userId: currentUser[1],
         title: content,
         completed: false,
       }),

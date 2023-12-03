@@ -8,7 +8,6 @@ import Sorting from './sorting';
 
 function Todos() {
 
-  // const {id}=useParams()
   
   const { currentUser } = useContext(UserContext);
   const [todos, setTodos] = useState([]);
@@ -55,14 +54,13 @@ useEffect(()=>{
       .then((json) => console.log(json));
   }
 
-
-  function TaskExecutionUpdate(onwTodo){
-    const changeCompleted = !onwTodo.completed
-    const saveTitle = onwTodo.title
-    fetch(`http://localhost:3005/Todos/${onwTodo.id}`, {
+  function TaskExecutionUpdate(oneTodo){
+    const changeCompleted = !oneTodo.completed
+    const saveTitle = oneTodo.title
+    fetch(`http://localhost:3005/Todos/${oneTodo.id}`, {
       method: "PUT",
       body: JSON.stringify({
-        userId: 1,
+        userId: currentUser[1],
         title : saveTitle,
         completed:changeCompleted
       }),
@@ -74,6 +72,25 @@ useEffect(()=>{
       .then((json) => console.log(json));
   }
 
+  function searchById() {
+    const sortedTodos = [...todos].sort((a, b) => a.id - b.id);
+    setTodos([...sortedTodos]);
+
+    setRenderFilter(renderFilter+1)
+  }
+
+
+  function SearchByCompleted() {
+  const sortedTodos = [...todos].sort((a, b) => {
+    return a.completed === b.completed ? a.id - b.id : (a.completed ? -1 : 1);
+  });
+
+  setTodos(sortedTodos);
+  setRenderFilter(renderFilter+1)
+ 
+}
+ 
+ 
   return (
     <section>
       <h1>This is the Todos component</h1>
@@ -82,6 +99,14 @@ useEffect(()=>{
       </div>
       <br/>
       <Sorting todos={json} UpdateInformation ={setTodos}  setTodosFilter={setTodosFilter} setRenderFilter={setRenderFilter} renderFilter={renderFilter} />
+      <br/>
+      <select name="" id="">
+        <option > Search option</option>
+        <option onClick={()=>searchById()}>Search by id</option>
+        <option onClick={()=>SearchByCompleted()}>Search by completed</option>
+        <option>Search by ABC</option>
+        <option>Search by random</option>
+      </select>
       <br/>
       <button onClick={() => {
           add();
@@ -98,10 +123,12 @@ useEffect(()=>{
           <div className='PresentationOfInformation' key={todo.id}>
             
             <ul>
+              <li>{todo.id}</li>
                 <li>{todo.title}</li>
                 <li>{todo.completed.toString()}</li>
                   <div className='checkbox'>
-                      <input onChange={()=>{TaskExecutionUpdate(todo);setRender(prevRender => prevRender + 1)}} type="checkbox"  />
+                      <input onChange={()=>{TaskExecutionUpdate(todo);
+                        setRender(prevRender => prevRender + 1)}} type="checkbox"  />
                   </div>
                 <Buttons userId={currentUser[1]} id={todo.id} rend={setRender} r={render} />
             </ul>

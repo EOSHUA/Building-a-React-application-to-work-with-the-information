@@ -63,7 +63,7 @@ function toApDate(){
     fetch(`http://localhost:3005/posts/${currentUser[1]}`, {
       method: "PUT",
       body: JSON.stringify({
-        userId: 1,
+        userId: currentUser[1],
         title: content,
       }),
       headers: {

@@ -1,16 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react'; 
-import { AlbumIdContext } from './Albums';
+
 
 export default function Photos(props) {
 
-    const { albumId ,setAlbumId } = useContext(AlbumIdContext);
+   
     const [photos, setPhotos] = useState([]);
     const [todosFilter, setTodosFilter] = useState([]);
     const [render,setRender] = useState(0);
     const [renderFilter,setRenderFilter] = useState(0);
     const [json, setJson] = useState([]);
+    let {albumId} = useParams();
     
   
    
@@ -27,19 +28,18 @@ export default function Photos(props) {
   return (
     <section>
          <div className=' butLinkToHome'>
-      <Link to='/User/Home'>Home</Link>
-      </div>
-      <div className=' butLinkToHome'>
-      <Link to='/User/Home/Albums'>Albums</Link>
-      </div>
-        <h1> photos</h1>
+           <Link to='/User/Home'>Home</Link>
+        </div>
+            <div className=' butLinkToHome'>
+            <Link to='/User/Home/Albums'>Albums</Link>
+            </div>
+              <h1> photos</h1>
         <div>
         {photos.map((photo) => (
           <div className='PresentationOfInformation' key={photo.id}>
             <ul>
                 <li>{photo.title}</li>
                 <li><img src= {photo.thumbnailUrl} alt="Girl in a jacket" ></img></li>
-                
             </ul>
             </div>
         ))}
