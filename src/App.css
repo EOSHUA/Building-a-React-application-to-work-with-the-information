@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 /* App.css */
+
 nav {
   background-color: #333;
   color: white;
   padding: 10px;
   text-align: center;
+}
+body{
+ 
+  font-family: 'Poppins', sans-serif;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
 }
 
 footer {
@@ -17,31 +28,44 @@ footer {
 }
 
 section {
+  
   text-align: center;
-  display: grid;
   grid-template-columns: repeat(3,auto);
   gap: 20px;
 
  
 }
-form {
+
+.divForm {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 5% auto;
+  padding: 20px;
+  width: 40%;
+  height: 350px;
+  background: rgba(190, 240, 212, 0.8);
+  border: 3px solid #2f2626;
+  border-radius: 15px;
 }
+
+
 label {
   margin-top: 10px;
 }
 input {
- 
   padding: 8px;
   margin-bottom: 10px;
-  width: 90%;
+  margin: 10px 0;
+  width: 120%;
+  border: none;
+  border-radius:50px ;
 }
 
 #buttonsubmit {
   padding: 10px;
-  background-color: #007bff;
+  width: 100%;
+  background-color: #9d00ff;
   color: white;
   border: none;
   cursor: pointer;
@@ -51,18 +75,17 @@ input {
   background-color: #0056b3;
 }
 
-
 .butLink{
   height: 450px;
+  width: 100%;
   font-size: x-large;
   background-color: #dfd4d4;
   color: #333;
   padding: 10px;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-
+  text-align: center;
 }
-
 
 .butLink:hover {
   background-color: #c0c0c0; 
@@ -73,6 +96,35 @@ Link {
   transition: color 0.3s ease; 
   font-weight: bold;
 }
+
 Link:hover {
   color: #0056b3; 
+}
+
+.panel{
+  display: flex;
+}
+
+.checkbox{
+  text-align: center;
+  margin-right: 17%;
+}
+.PresentationOfInformation{
+  color: #007bff;
+  background-color: #C9AE5D
+}
+.butLinkToRegistration{
+  width: 20%;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 30%;
+  height: 150px;
+  background-color: #C9AE5D;
+}
+.butLinkToHome{
+  background-color: #C9AE5D;
+  width: 10%;
+  height: 80px;
+  border-radius: 30%;
 }

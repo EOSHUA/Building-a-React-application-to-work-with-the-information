@@ -48,15 +48,16 @@ function Login() {
     <section>
       <h1>Welcome</h1>
       <h3>Enter your details</h3>
+      <div className="divForm">
       <form onSubmit={handleSubmit(onSubmitHadler)}>
-        <label htmlFor="firstName">first name</label>
-        <input type="text" id="firstName" {...register("firstName")}></input>
+        <label htmlFor="firstName"></label>
+        <input type="text" id="firstName" placeholder="userName" {...register("firstName")}></input>
         <p>{errors.firstName?.message}</p>
 
         <br />
 
-        <label htmlFor="password">password </label>
-        <input type="text" id="password" {...register("password")}></input>
+        <label htmlFor="password"> </label>
+        <input type="text" id="password" placeholder="password" {...register("password")}></input>
         <p>{errors.confirmPassword?.message}</p>
 
         <br />
@@ -64,8 +65,9 @@ function Login() {
         <button id="buttonsubmit" type="submit" className="buttonSubmit">
           שלח
         </button>
+    
       </form>
-      <br />
+      </div>
     </section>
   );
 }

@@ -10,7 +10,9 @@ function UserInfo (){
     return(
         <section>
         <h1 >this is the Albums components</h1>
-        <Link to ='/User/Home'>Home</Link>
+        <div className=' butLinkToHome'>
+        <Link to ='/User/Home'> Home</Link>
+        </div>
 
          
         </section>
