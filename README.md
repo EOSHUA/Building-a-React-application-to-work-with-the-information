@@ -3,7 +3,7 @@ A React-based user dashboard project that allows users to efficiently manage the
 
 Note! The db.json file should run on http://localhost:3005
 
-כדככככ
+
 Table of Contents
 Introduction
 Features
