@@ -119,7 +119,7 @@ export function UserInfo() {
                   setRender(render + 1);
                 }}
               >
-                upDate
+                update
               </button>
 
               <button

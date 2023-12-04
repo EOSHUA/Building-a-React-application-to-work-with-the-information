@@ -59,7 +59,9 @@ useEffect(()=>{
 
 function toApDate(){
   let content=prompt();
-    if (content==null) {return}
+    if (content==null){
+      alert("Please enter a date")
+      {return}} 
     fetch(`http://localhost:3005/posts/${currentUser[1]}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -126,7 +128,7 @@ function toApDate(){
                   <button onClick={() => {
                       toApDate ();
                       setRender (render+1);
-                      }}>upDate</button>
+                      }}>update</button>
 
                       <button onClick={() => {
                         deletePost ();

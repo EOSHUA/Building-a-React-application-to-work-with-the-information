@@ -9,14 +9,18 @@ import Home from "./Home";
 import ReactDOM from "react-dom/client";
 import { UserContext } from "../App";
 
-function Login() {
-  const { setCurrentUser, currentUser } = useContext(UserContext);
 
+
+
+function Login() {
+
+  const { setCurrentUser, currentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const schema = yup.object().shape({
     firstName: yup.string().required("You have to write something!"),
     password: yup.string().required("Minimum 4 characters "),
   });
+
   const {
     register,
     handleSubmit,
@@ -29,14 +33,10 @@ function Login() {
     const user = await fetch(
       `http://localhost:3005/users?username=${userName1}&website=${password1}`
     )
-      .then((response) => response.json())
-      .then((json) => {
+        .then((response) => response.json())
+        .then((json) => {
         if (json.length !== 0) {
-          console.log(json[0].id);
           setCurrentUser([userName1 , json[0].id]);
-
-
-          // Assuming you have a route named 'home'
           navigate("User/Home");
         } else {
           alert("user not exist");
@@ -49,24 +49,24 @@ function Login() {
       <h1>Welcome</h1>
       <h3>Enter your details</h3>
       <div className="divForm">
-      <form onSubmit={handleSubmit(onSubmitHadler)}>
-        <label htmlFor="firstName"></label>
-        <input type="text" id="firstName" placeholder="userName" {...register("firstName")}></input>
-        <p>{errors.firstName?.message}</p>
+        <form onSubmit={handleSubmit(onSubmitHadler)}>
+            <label htmlFor="firstName"></label>
+            <input type="text" id="firstName" placeholder="userName" {...register("firstName")}></input>
+            <p>{errors.firstName?.message}</p>
 
-        <br />
+          <br />
 
-        <label htmlFor="password"> </label>
-        <input type="text" id="password" placeholder="password" {...register("password")}></input>
-        <p>{errors.confirmPassword?.message}</p>
+            <label htmlFor="password"> </label>
+            <input type="text" id="password" placeholder="password" {...register("password")}></input>
+            <p>{errors.confirmPassword?.message}</p>
 
-        <br />
+          <br />
 
-        <button id="buttonsubmit" type="submit" className="buttonSubmit">
-          שלח
-        </button>
-    
-      </form>
+            <button id="buttonsubmit" type="submit" className="buttonSubmit">
+              שלח
+            </button>
+      
+        </form>
       </div>
     </section>
   );

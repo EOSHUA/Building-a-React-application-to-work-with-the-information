@@ -1,44 +1,38 @@
-
-import React, { useEffect, useState, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { UserContext } from '../App';
-import Buttons from './buttons';
-import Sorting from './sorting';
-
+import React, { useEffect, useState, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { UserContext } from "../App";
+import Buttons from "./buttons";
+import Sorting from "./sorting";
 
 function Todos() {
-
-  
   const { currentUser } = useContext(UserContext);
   const [todos, setTodos] = useState([]);
   const [todosFilter, setTodosFilter] = useState([]);
-  const [render,setRender] = useState(0);
-  const [renderFilter,setRenderFilter] = useState(0);
+  const [render, setRender] = useState(0);
+  const [renderFilter, setRenderFilter] = useState(0);
   const [json, setJson] = useState([]);
-  
 
- 
   useEffect(() => {
     const fetchTodos = async () => {
-      const response = await fetch(`http://localhost:3005/todos?userId=${currentUser[1]}`);
+      const response = await fetch(
+        `http://localhost:3005/todos?userId=${currentUser[1]}`
+      );
       const json = await response.json();
       setTodos(json);
-      setJson(json)
+      setJson(json);
     };
     fetchTodos();
-  },[render]);
+  }, [render]);
 
-
-useEffect(()=>{
-  setTodos(todosFilter);
-
-},[renderFilter])
-
-
+  useEffect(() => {
+    setTodos(todosFilter);
+  }, [renderFilter]);
 
   function add() {
-    let content=prompt();
-    if (content==null) {return}
+    let content = prompt();
+    if (content == null) {
+      return;
+    }
     fetch("http://localhost:3005/Todos", {
       method: "POST",
       body: JSON.stringify({
@@ -54,15 +48,15 @@ useEffect(()=>{
       .then((json) => console.log(json));
   }
 
-  function TaskExecutionUpdate(oneTodo){
-    const changeCompleted = !oneTodo.completed
-    const saveTitle = oneTodo.title
+  function TaskExecutionUpdate(oneTodo) {
+    const changeCompleted = !oneTodo.completed;
+    const saveTitle = oneTodo.title;
     fetch(`http://localhost:3005/Todos/${oneTodo.id}`, {
       method: "PUT",
       body: JSON.stringify({
         userId: currentUser[1],
-        title : saveTitle,
-        completed:changeCompleted
+        title: saveTitle,
+        completed: changeCompleted,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -72,72 +66,120 @@ useEffect(()=>{
       .then((json) => console.log(json));
   }
 
-  function searchById() {
-    const sortedTodos = [...todos].sort((a, b) => a.id - b.id);
-    setTodos([...sortedTodos]);
-
-    setRenderFilter(renderFilter+1)
+  function selectHandler(e) {
+    if (e.target.value === "A-Z") {
+        let newData = [...todos];
+        newData.sort((a, b) => {
+            if (a.title < b.title) {
+                return -1
+            }
+            else if (a.title > b.title) {
+                return 1
+            }
+            else {
+                return 0
+            }
+        })
+        setTodos(newData)
+    }
+    if (e.target.value === "Completed") {
+        let newData = [...todos];
+        newData.sort((a, b) => {
+            if (a.completed) {
+                return -1
+            }
+            else if (!a.completed) {
+                return 1
+            }
+        })
+        setTodos(newData)
+    }
+    if (e.target.value === "uncompleted") {
+      let newData = [...todos];
+      newData.sort((a, b) => {
+          if (a.completed) {
+              return 1
+          }
+          else if (!a.completed) {
+              return -1
+          }
+      })
+      setTodos(newData)
   }
-
-
-  function SearchByCompleted() {
-  const sortedTodos = [...todos].sort((a, b) => {
-    return a.completed === b.completed ? a.id - b.id : (a.completed ? -1 : 1);
-  });
-
-  setTodos(sortedTodos);
-  setRenderFilter(renderFilter+1)
- 
+    if (e.target.value === "Randomaly") {
+        let newData = [...todos];
+        newData.sort((x, y) => {
+            if (Math.random() < 0.5) {
+                return 1
+            } else {
+                return -1
+            }
+        })
+        setTodos(newData)
+    }
 }
- 
- 
+
+
   return (
     <section>
       <h1>This is the Todos component</h1>
-      <div className=' butLinkToHome'>
-      <Link to='/User/Home'>Home</Link>
+      <div className=" butLinkToHome">
+        <Link to="/User/Home">Home</Link>
       </div>
-      <br/>
-      <Sorting todos={json} UpdateInformation ={setTodos}  setTodosFilter={setTodosFilter} setRenderFilter={setRenderFilter} renderFilter={renderFilter} />
-      <br/>
-      <select name="" id="">
-        <option > Search option</option>
-        <option onClick={()=>searchById()}>Search by id</option>
-        <option onClick={()=>SearchByCompleted()}>Search by completed</option>
-        <option>Search by ABC</option>
-        <option>Search by random</option>
-      </select>
-      <br/>
-      <button onClick={() => {
+      <br />
+      <Sorting
+        todos={json}
+        UpdateInformation={setTodos}
+        setTodosFilter={setTodosFilter}
+        setRenderFilter={setRenderFilter}
+        renderFilter={renderFilter}
+      />
+      <br />
+
+      <select className='filter' onChange={(e) => selectHandler(e)}>
+                    <option value="A-Z">A-Z</option>
+                    <option value="Randomaly">Randomaly</option>
+                    <option value="Completed">Completed</option>
+                    <option value="uncompleted">uncompleted</option>
+                </select>
+      <br />
+      <button
+        onClick={() => {
           add();
           setRender(1);
         }}
       >
         add
       </button>
-        <div>
-         </div>
-         <br/>
+      <br />
       <div>
         {todos.map((todo) => (
-          <div className='PresentationOfInformation' key={todo.id}>
-            
+          <div className="PresentationOfInformation" key={todo.id}>
             <ul>
               <li>{todo.id}</li>
-                <li>{todo.title}</li>
-                <li>{todo.completed.toString()}</li>
-                  <div className='checkbox'>
-                      <input onChange={()=>{TaskExecutionUpdate(todo);
-                        setRender(prevRender => prevRender + 1)}} type="checkbox"  />
-                  </div>
-                <Buttons userId={currentUser[1]} id={todo.id} rend={setRender} r={render} />
+              <li>{todo.title}</li>
+              <li>{todo.completed.toString()}</li>
+              <div className="checkbox">
+                <input
+                  onChange={() => {
+                    TaskExecutionUpdate(todo);
+                    setRender((prevRender) => prevRender + 1);
+                  }}
+                  type="checkbox"
+                />
+              </div>
+              <Buttons
+                userId={currentUser[1]}
+                id={todo.id}
+                setRender={setRender}
+                render={render}
+              />
             </ul>
-            </div>
+          </div>
         ))}
       </div>
-
     </section>
   );
-        }
+}
 
 export default Todos;

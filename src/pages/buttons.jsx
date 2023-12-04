@@ -5,6 +5,7 @@ import   {  useContext } from 'react';
 export default function Buttons(props) {
 
   const { currentUser } = useContext(UserContext);
+  
   function deleteTodo() {
     fetch( `http://localhost:3005/todos/${props.id}`, {
       method: "DELETE",
@@ -18,7 +19,9 @@ export default function Buttons(props) {
   
  function toApDate(){
   let content=prompt();
-    if (content==null) {return}
+    if (content==null){
+      alert("Please enter a date")
+     {return}}
     fetch(`http://localhost:3005/Todos/${props.id}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -38,11 +41,11 @@ export default function Buttons(props) {
     <div>
       <button onClick={() => {
          toApDate ();
-        props.rend  (props.r+1);
-        }}>upDate</button>
+        props.setRender  (props.render+1);
+        }}>update</button>
       <button onClick={() => {
          deleteTodo ();
-        props.rend(props.r+1);
+        props.setRender(props.render+1);
         }}>delete</button>
       
     </div>
