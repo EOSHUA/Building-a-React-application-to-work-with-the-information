@@ -122,7 +122,6 @@ function Todos() {
 
   return (
     <section>
-      <h1>This is the Todos component</h1>
       <div className=" butLinkToHome">
         <Link to="/User/Home">Home</Link>
       </div>

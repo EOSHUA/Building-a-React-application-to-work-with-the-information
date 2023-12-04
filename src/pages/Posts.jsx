@@ -94,7 +94,6 @@ function toApDate(){
 
   return (
     <section>
-      <h1>This is the posts component</h1>
       <div className=' butLinkToHome'>
       <Link to='/User/Home'>Home</Link>
       </div>

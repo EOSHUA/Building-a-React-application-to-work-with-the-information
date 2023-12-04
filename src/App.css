@@ -8,7 +8,10 @@ nav {
   text-align: center;
 }
 body{
- 
+  background: linear-gradient(500deg, #FFD900, rgb(193, 72, 72));
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: cover;
   font-family: 'Poppins', sans-serif;
   background-repeat: no-repeat;
   background-position: center;
@@ -44,9 +47,21 @@ section {
   padding: 20px;
   width: 40%;
   height: 350px;
-  background:  #f1d170;
+  background:  #dfbf5e;
   border: 3px solid #2f2626;
   border-radius: 15px;
+  animation: scaleUp 0.5s ease;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(30);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 label {
@@ -111,27 +126,32 @@ Link:hover {
 }
 
 .PresentationOfInformation{
-  color: #007bff;
-  background-color: #C9AE5D
+  color: #3a3c3a;
+  background-color: #ad8407;
+  font-size: 20px;
 }
 
 .butLinkToRegistration{
   width: 20%;
   text-align: center;
   padding: 20px;
+  padding-top: 80px;
   margin-top: 250px;
-  border-radius: 30%;
+ border: 3px solid black;
   height: 150px;
-  background-color: #C9AE5D;
+  background: linear-gradient(500deg ,rgb(193, 72, 72), #c5b039);
 }
 
 .butLinkToHome{
   background-color: #C9AE5D;
+  padding-top: 30px;
   width: 10%;
   height: 80px;
   margin-left: 45%;
   margin-top: 50px;
-  border-radius: 30%;
+  border: 3px solid black;
+  background: linear-gradient(500deg ,rgb(193, 72, 72), #c5b039);
+ 
 }
 
 .SelectedPostDetails{

@@ -90,7 +90,6 @@ export function UserInfo() {
 
   return (
     <section>
-      <h1>This is the Albums component</h1>
       <div className=" butLinkToHome">
         <Link to="/User/Home">Home</Link>
       </div>
